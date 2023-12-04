@@ -14,15 +14,11 @@ paraview.simple._DisableFirstRenderCameraReset()
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_reader.py", ns=globals())
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_filters.py", ns=globals())
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_projection.py", ns=globals())
-
-LoadState("/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/states/state_slice_lat_lev_rotate_layout.pvsm")
+LoadState("/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/states/state_slice_lat_lev_rotate_layout1.pvsm")
 
 # find source
 v2_F2010_nc00_inst_macmic01eamh02010122500000nc = FindSource('v2_F2010_nc00_inst_macmic01.eam.h0.2010-12-25-00000.nc')
-print(v2_F2010_nc00_inst_macmic01eamh02010122500000nc)
-# set active source
 SetActiveSource(v2_F2010_nc00_inst_macmic01eamh02010122500000nc)
-# Properties modified on v2_F2010_nc00_inst_macmic01eamh02010122500000nc
 v2_F2010_nc00_inst_macmic01eamh02010122500000nc.a3DMiddleLayerVariables = ['cnd01_ALST_ACTDIAG01', 'cnd01_AST_ACTDIAG01', 'cnd01_CDMC_ACTDIAG01', 'cnd01_CDNC_ACTDIAG01', 'cnd01_RAL_ACTDIAG01', 'cnd01_REL_ACTDIAG01']
 
 # get active view
@@ -52,21 +48,24 @@ for i in range(1, 361):
                         [-sin(r(a)), cos(r(a)), 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]])
-    ocam    = np.array([175.25241088867188, 3023.123900962093, 2416.484130859375, 1.0])
-    cam     = ocam.dot(rZmatrix)
-    ofoc    = np.array([175.25241088867188, 0.0, 2416.484130859375, 1.0])
-    foc     = ofoc.dot(rZmatrix)
+    ocam       = np.array([531.7759596581271, 4369.374717357803, 2151.6182850174414, 1.0])
+    cam        = ocam.dot(rZmatrix)
+    ofoc       = np.array([531.7759596581271, 0.0, 2151.6182850174414, 1.0])
+    foc        = ofoc.dot(rZmatrix)
+    print(cam)
+    print(foc)
     '''
     # current camera placement for renderView1
-    renderView1.CameraPosition = [175.25241088867188, 3023.123900962093, 2416.484130859375]
-    renderView1.CameraFocalPoint = [175.25241088867188, 0.0, 2416.484130859375]
+    renderView1.CameraPosition = [531.7759596581271, 4369.374717357803, 2151.6182850174414]
+    renderView1.CameraFocalPoint = [531.7759596581271, 0.0, 2151.6182850174414]
     renderView1.CameraViewUp = [0.0, 0.0, 1.0]
-    renderView1.CameraParallelScale = 1386.1438050807299
+    renderView1.CameraParallelScale = 338.4313507490336
     '''
+    renderView1.InteractionMode = '2D'
     renderView1.CameraPosition = [cam[0], cam[1], cam[2]]
     renderView1.CameraFocalPoint = [foc[0], foc[1], foc[2]]
     renderView1.CameraViewUp = [0.0, 0.0, 1.0]
-    #renderView1.CameraParallelScale = 1386.1438050807299
+    #renderView1.CameraParallelScale = 338.4313507490336
 
     # update the view to ensure updated data information
     renderView1.Update()
