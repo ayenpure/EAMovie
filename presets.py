@@ -51,6 +51,8 @@ for (fname, fpath) in zip(presetnames, presetpaths):
 
     ImportPresets(filename=fpath, location=16)
     cnd01_AST_ACTDIAG01LUT.ApplyPreset(name, True)
-
     # save screenshot
     SaveScreenshot(join('/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/', name + '.png'), renderView1, 16, ImageResolution=[1988, 1144])
+    # invert the transfer function
+    cnd01_AST_ACTDIAG01LUT.InvertTransferFunction()
+    SaveScreenshot(join('/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/', name + '_inv.png'), renderView1, 16, ImageResolution=[1988, 1144])

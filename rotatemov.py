@@ -52,16 +52,16 @@ for i in range(1, 361):
                         [-sin(r(a)), cos(r(a)), 0, 0],
                         [0, 0, 1, 0],
                         [0, 0, 0, 1]])
-    ocam    = np.array([175.25241088867188, 3023.123900962093, 2416.484130859375, 1.0])
+    ocam    = np.array([58.817138671875, 2167.9455323715842, 2112.3284912109375, 1.0])
     cam     = ocam.dot(rZmatrix)
-    ofoc    = np.array([175.25241088867188, 0.0, 2416.484130859375, 1.0])
+    ofoc    = np.array([58.817138671875, 0.0, 2112.3284912109375, 1.0])
     foc     = ofoc.dot(rZmatrix)
     '''
     # current camera placement for renderView1
-    renderView1.CameraPosition = [175.25241088867188, 3023.123900962093, 2416.484130859375]
-    renderView1.CameraFocalPoint = [175.25241088867188, 0.0, 2416.484130859375]
+    renderView1.CameraPosition = [58.817138671875, 2167.9455323715842, 2112.3284912109375]
+    renderView1.CameraFocalPoint = [58.817138671875, 0.0, 2112.3284912109375]
     renderView1.CameraViewUp = [0.0, 0.0, 1.0]
-    renderView1.CameraParallelScale = 1386.1438050807299
+    renderView1.CameraParallelScale = 1202.7796693600574
     '''
     renderView1.CameraPosition = [cam[0], cam[1], cam[2]]
     renderView1.CameraFocalPoint = [foc[0], foc[1], foc[2]]
