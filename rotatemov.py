@@ -5,11 +5,26 @@
 
 import numpy as np
 import math
+import argparse
+import os.path
 
 #### import the simple module from the paraview
 from paraview.simple import *
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
+
+parser = argparse.ArgumentParser(
+                    prog='rotatemov',
+                    description='Script to generate individual images for movie')
+parser.add_argument('-d', '--datafile', help='path to the data file')
+parser.add_argument('-c', '--connfile', help='path to the connectivity file')
+args = parser.parse_args()
+
+datafile = args.datafile
+connfile = args.connfile
+if not ( os.path.isfile(datafile) and os.path.isfile(connfile) ):
+    print('Could not find the correct data and connectivity files')
+    exit()
 
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_reader.py", ns=globals())
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_filters.py", ns=globals())
@@ -19,12 +34,13 @@ LoadState("/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/states/state_s
 
 # find source
 data = FindSource('Data')
-print(data)
-# set active source
-SetActiveSource(data)
-# Properties modified on v2_F2010_nc00_inst_macmic01eamh02010122500000nc
+data.DataFile = datafile
+data.ConnectivityFile = connfile
 data.a2DVariables = ['CLDLOW', 'CLDTOT']
 data.a3DMiddleLayerVariables = ['cnd01_ALST_ACTDIAG01', 'cnd01_AST_ACTDIAG01', 'cnd01_CDMC_ACTDIAG01', 'cnd01_CDNC_ACTDIAG01', 'cnd01_RAL_ACTDIAG01', 'cnd01_REL_ACTDIAG01']
+data.UpdatePipeline()
+SetActiveSource(data)
+# Properties modified on v2_F2010_nc00_inst_macmic01eamh02010122500000nc
 
 # find view
 renderView1 = FindViewOrCreate('RenderView1', viewtype='RenderView')
