@@ -29,6 +29,7 @@ if not ( os.path.isfile(datafile) and os.path.isfile(connfile) ):
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_reader.py", ns=globals())
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_filters.py", ns=globals())
 LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_projection.py", ns=globals())
+LoadPlugin("/home/local/KHQ/abhi.yenpure/repositories/eam/scripts/eam_linesrc.py", ns=globals())
 
 LoadState("/home/local/KHQ/abhi.yenpure/repositories/eam/forMovie/states/state_slice_lat_lev_rotate_layout_radar.pvsm")
 
